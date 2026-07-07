@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+/* ── Theme tokens (from the provided :root palette) ───────────────────── */
+@theme {
+  --color-base: #101010;
+  --color-panel: #191919;
+  --color-darker: #0c0c0c;
+  --color-main: #f0f0f0;
+  --color-dim: #888888;
+  --color-good: #4ade80;
+  --color-bad: #f87171;
+  --color-line: rgba(255, 255, 255, 0.06);
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Base document styles / frameless-window behaviour ────────────────── */
+html {
+  background: var(--color-base);
+}
+
+body {
+  user-select: none;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--color-main);
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* interactive elements stay clickable even inside a drag region */
+button,
+input,
+select,
+label,
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* form controls don't reliably inherit color in WebView2, and WebView2 also
+   forces input text via -webkit-text-fill-color — set both explicitly. */
+input,
+textarea,
+select {
+  color: var(--color-main, #f0f0f0);
+  -webkit-text-fill-color: var(--color-main, #f0f0f0);
+  caret-color: var(--color-main, #f0f0f0);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-dim, #888888);
+  -webkit-text-fill-color: var(--color-dim, #888888);
+  opacity: 1;
+}
+/* opt-in override for intentionally-colored inputs (e.g. the Lua executor) */
+.input-good {
+  color: var(--color-good, #4ade80);
+  -webkit-text-fill-color: var(--color-good, #4ade80);
+}
+input[type="color"] {
+  -webkit-text-fill-color: initial;
+}
+
+/* hide scrollbars but keep scrolling */
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+* {
+  scrollbar-width: none;
+}
+
+/* faint dotted grid backdrop, matching the original .app-wrapper::before */
+.grid-backdrop::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.3s ease forwards;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin 0.8s linear infinite;
+}

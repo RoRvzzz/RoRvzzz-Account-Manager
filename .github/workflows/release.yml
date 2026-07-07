@@ -1,0 +1,49 @@
+name: release
+
+# Push a tag like v1.0.0 to build installers and publish a GitHub Release.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build & release
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "RoRvzzz Account Manager ${{ github.ref_name }}"
+          releaseBody: |
+            ### RoRvzzz Account Manager ${{ github.ref_name }}
+
+            Download the Windows installer below (`.msi` or the NSIS `-setup.exe`).
+
+            > Unsigned build — Windows SmartScreen may warn on first run
+            > (More info → Run anyway).
+          releaseDraft: false
+          prerelease: false
