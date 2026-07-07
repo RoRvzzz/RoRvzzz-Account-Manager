@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { listen } from "@tauri-apps/api/event";
 import Modal from "./Modal";
+import Select from "./Select";
 import { api } from "../api";
 import { toast } from "../toast";
+
+function logColor(line: string): string {
+  if (line.startsWith("[+]") || line.startsWith("Saved")) return "text-good";
+  if (line.startsWith("[!]")) return "text-bad";
+  if (line.startsWith("[*]")) return "text-yellow-400/80";
+  return "text-dim";
+}
 
 const BINARY_TYPES = [
   "WindowsPlayer",
@@ -99,31 +107,21 @@ export default function DeploymentsModal({ onClose }: { onClose: () => void }) {
         </div>
         <div>
           <label className={label}>Binary type</label>
-          <select
-            className={`${input} w-full`}
+          <Select
+            className="w-full"
             value={binaryType}
-            onChange={(e) => setBinaryType(e.target.value)}
-          >
-            {BINARY_TYPES.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
+            onChange={setBinaryType}
+            options={[...BINARY_TYPES]}
+          />
         </div>
         <div>
           <label className={label}>Architecture</label>
-          <select
-            className={`${input} w-full`}
+          <Select
+            className="w-full"
             value={arch}
-            onChange={(e) => setArch(e.target.value)}
-          >
-            {ARCHS[binaryType].map((a) => (
-              <option key={a} value={a}>
-                {a}
-              </option>
-            ))}
-          </select>
+            onChange={setArch}
+            options={ARCHS[binaryType]}
+          />
         </div>
         <div>
           <label className={label}>Version hash</label>
@@ -152,17 +150,37 @@ export default function DeploymentsModal({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      <div
-        ref={logRef}
-        className="mt-3 h-40 overflow-y-auto rounded-lg border border-line bg-black/20 p-2 font-mono text-[0.66rem] leading-relaxed text-dim"
-      >
-        {log.length === 0 ? (
-          <span className="text-dim/60">
-            Downloads a full client deployment zip to your Downloads folder.
+      <div className="mt-3 overflow-hidden rounded-lg border border-line bg-black/30">
+        <div className="flex items-center gap-1.5 border-b border-line px-3 py-1.5">
+          <span className="h-2 w-2 rounded-full bg-bad/70" />
+          <span className="h-2 w-2 rounded-full bg-yellow-400/70" />
+          <span className="h-2 w-2 rounded-full bg-good/70" />
+          <span className="ml-1.5 text-[0.62rem] uppercase tracking-wider text-dim">
+            output
           </span>
-        ) : (
-          log.map((l, i) => <div key={i}>{l}</div>)
-        )}
+          {busy && (
+            <span className="ml-auto flex items-center gap-1.5 text-[0.62rem] text-dim">
+              <span className="animate-spin-slow inline-block h-2.5 w-2.5 rounded-full border-2 border-white/20 border-t-white/70" />
+              working
+            </span>
+          )}
+        </div>
+        <div
+          ref={logRef}
+          className="h-40 space-y-0.5 overflow-y-auto px-3 py-2 font-mono text-[0.66rem] leading-relaxed"
+        >
+          {log.length === 0 ? (
+            <span className="text-dim/50">
+              Downloads a full client deployment zip to your Downloads folder.
+            </span>
+          ) : (
+            log.map((l, i) => (
+              <div key={i} className={logColor(l)}>
+                {l}
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
       <div className="mt-4 flex justify-end gap-2">

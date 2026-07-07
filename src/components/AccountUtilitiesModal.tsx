@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
+import Select from "./Select";
 import { api } from "../api";
 import { toast } from "../toast";
 import type { AccountView } from "../types";
@@ -105,17 +106,12 @@ export default function AccountUtilitiesModal({
           <>
             <div>
               <label className={label}>Who can follow me</label>
-              <select
-                className={input}
+              <Select
+                className="w-full"
                 value={privacy}
-                onChange={(e) => setPrivacy(e.target.value)}
-              >
-                {PRIVACY.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
+                onChange={setPrivacy}
+                options={PRIVACY}
+              />
             </div>
             <Action>
               <button

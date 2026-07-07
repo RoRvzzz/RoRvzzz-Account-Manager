@@ -66,6 +66,11 @@ textarea::placeholder {
 input[type="color"] {
   -webkit-text-fill-color: initial;
 }
+/* dark native <select> popup fallback (for any non-custom selects) */
+select option {
+  background: var(--color-panel);
+  color: var(--color-main);
+}
 
 /* hide scrollbars but keep scrolling */
 ::-webkit-scrollbar {
