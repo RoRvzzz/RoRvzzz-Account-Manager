@@ -12,6 +12,7 @@ import type {
   NexusStatus,
   Recent,
   VipLink,
+  ClientVersion,
 } from "./types";
 
 export const api = {
@@ -124,4 +125,22 @@ export const api = {
   nexusCommand: (targets: string[], message: string) =>
     invoke<number>("nexus_command", { targets, message }),
   nexusLua: () => invoke<string>("nexus_lua"),
+
+  // deployments / version control
+  getClientVersion: (binaryType: string, channel: string) =>
+    invoke<ClientVersion>("get_client_version", { binaryType, channel }),
+  downloadDeployment: (
+    channel: string,
+    binaryType: string,
+    arch: string,
+    version: string,
+    compress: boolean
+  ) =>
+    invoke<string>("download_deployment", {
+      channel,
+      binaryType,
+      arch,
+      version,
+      compress,
+    }),
 };

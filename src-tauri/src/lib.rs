@@ -1,5 +1,6 @@
 mod commands;
 mod crypto;
+mod deploy;
 mod error;
 mod favorites;
 mod fps;
@@ -106,6 +107,8 @@ pub fn run() {
             commands::nexus_teleport,
             commands::nexus_command,
             commands::nexus_lua,
+            commands::get_client_version,
+            commands::download_deployment,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

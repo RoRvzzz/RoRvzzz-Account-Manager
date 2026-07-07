@@ -12,6 +12,7 @@ import ControlPanelModal from "./components/ControlPanelModal";
 import DescriptionModal from "./components/DescriptionModal";
 import AccountUtilitiesModal from "./components/AccountUtilitiesModal";
 import MoveGroupModal from "./components/MoveGroupModal";
+import DeploymentsModal from "./components/DeploymentsModal";
 import Tooltip from "./components/Tooltip";
 import { Toaster, toast } from "./toast";
 import { applyTheme } from "./theme";
@@ -46,6 +47,7 @@ export default function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [showUtilities, setShowUtilities] = useState(false);
   const [showControl, setShowControl] = useState(false);
+  const [showDeployments, setShowDeployments] = useState(false);
   const [editingNotes, setEditingNotes] = useState<AccountView | null>(null);
   const [utilitiesFor, setUtilitiesFor] = useState<AccountView | null>(null);
   const [movingGroup, setMovingGroup] = useState<AccountView | null>(null);
@@ -418,6 +420,12 @@ export default function App() {
             <circle cx="11" cy="12" r="1.6" stroke="currentColor" strokeWidth="1.2" />
           </svg>
         </ToolbarButton>
+        <ToolbarButton onClick={() => setShowDeployments(true)} label="Roblox Versions">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2v7M5 6.5 8 9.5l3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M3 11.5V13h10v-1.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          </svg>
+        </ToolbarButton>
         <ToolbarButton onClick={() => setShowSettings(true)} label="Settings">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
@@ -598,6 +606,9 @@ export default function App() {
       )}
       {showControl && (
         <ControlPanelModal onClose={() => setShowControl(false)} />
+      )}
+      {showDeployments && (
+        <DeploymentsModal onClose={() => setShowDeployments(false)} />
       )}
       {editingNotes && (
         <DescriptionModal

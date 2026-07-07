@@ -9,6 +9,7 @@ use serde::Serialize;
 use tauri::{AppHandle, Manager, State, WebviewUrl, WebviewWindowBuilder};
 
 use crate::error::{AppError, AppResult};
+use crate::deploy::{self, ClientVersion};
 use crate::favorites::{self, Favorite};
 use crate::fps;
 use crate::nexus::{self, ConnectedAccount, NexusManager};
@@ -694,6 +695,43 @@ pub fn nexus_command(
     mgr: State<'_, NexusManager>,
 ) -> usize {
     nexus::send_to(&mgr, &targets, &message)
+}
+
+/* ── Roblox version / deployment downloader ──────────────────────────── */
+
+#[tauri::command]
+pub async fn get_client_version(
+    binary_type: String,
+    channel: String,
+) -> AppResult<ClientVersion> {
+    deploy::client_version(&binary_type, &channel).await
+}
+
+/// Download & assemble a Roblox deployment into the user's Downloads folder.
+#[tauri::command]
+pub async fn download_deployment(
+    app: AppHandle,
+    channel: String,
+    binary_type: String,
+    arch: String,
+    version: String,
+    compress: bool,
+) -> AppResult<String> {
+    let dest = directories::UserDirs::new()
+        .and_then(|d| d.download_dir().map(|p| p.to_path_buf()))
+        .unwrap_or(std::env::temp_dir());
+
+    let path = deploy::download_deployment(
+        &app,
+        &channel,
+        &binary_type,
+        &arch,
+        &version,
+        &dest,
+        compress,
+    )
+    .await?;
+    Ok(path.to_string_lossy().to_string())
 }
 
 /// The Nexus.lua client script, for the Help tab (load in your executor).

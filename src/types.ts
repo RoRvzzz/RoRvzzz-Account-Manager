@@ -115,6 +115,12 @@ export interface NexusStatus {
   accounts: ConnectedAccount[];
 }
 
+export interface ClientVersion {
+  version: string;
+  client_version_upload: string;
+  bootstrapper_version: string;
+}
+
 export const PresenceLabel: Record<number, string> = {
   0: "Offline",
   1: "Online",
