@@ -229,6 +229,14 @@ export default function SettingsModal({
                 manager. Accounts are stored encrypted on this device.
               </p>
               <p className="text-[0.72rem]">Version 1.0.0</p>
+              <button
+                onClick={() =>
+                  window.dispatchEvent(new Event("ram:check-updates"))
+                }
+                className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[0.78rem] font-medium text-main transition hover:bg-white/15"
+              >
+                Check for updates
+              </button>
             </div>
           )}
         </div>

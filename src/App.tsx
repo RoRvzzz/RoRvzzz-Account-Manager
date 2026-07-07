@@ -13,6 +13,7 @@ import DescriptionModal from "./components/DescriptionModal";
 import AccountUtilitiesModal from "./components/AccountUtilitiesModal";
 import MoveGroupModal from "./components/MoveGroupModal";
 import DeploymentsModal from "./components/DeploymentsModal";
+import UpdatePrompt from "./components/UpdatePrompt";
 import Tooltip from "./components/Tooltip";
 import { Toaster, toast } from "./toast";
 import { applyTheme } from "./theme";
@@ -669,6 +670,7 @@ export default function App() {
         </Modal>
       )}
 
+      <UpdatePrompt />
       <Toaster />
     </div>
   );
