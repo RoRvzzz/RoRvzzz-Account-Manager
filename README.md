@@ -7,7 +7,7 @@ A fast, modern Roblox account manager built with **Rust + Tauri v2** and a
 **React + TypeScript + Tailwind CSS** UI. Frameless, dark, and lightweight.
 
 Due to a revival and full rewrite of my [ruststrap](https://github.com/RoRvzzz/RustStrap) coming I will likely not be adding any more bootstrapping features past version control and exploiting syncing.
-If this doesn't work out then you might see more bootstrapping features being added like Discord RP an
+
 
 ## Download
 
