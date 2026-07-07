@@ -76,8 +76,9 @@ Cookies stay in the Rust process the frontend only ever receives a
 cookie-free view of each account.
 
 ## Info
-Credit to focats rblx swap for the UI inspo: https://github.com/focat69/rblxswap/
-https://discord.gg/macrostack for support
+- This project is greatly inspired by icewolf's RAM, https://github.com/ic3w0lf22/Roblox-Account-Manager
+- Credit to focats rblx swap for the UI inspo: https://github.com/focat69/rblxswap/
+- https://discord.gg/macrostack for support
 
 ## Disclaimer
 
