@@ -11,25 +11,25 @@ A fast, modern Roblox account manager built with **Rust + Tauri v2** and a
 Grab the latest Windows installer (`.msi` or NSIS `-setup.exe`) from the
 [Releases](https://github.com/RoRvzzz/RoRvzzz-Account-Manager/releases) page.
 
-> Unsigned build — Windows SmartScreen may warn on first run
+> Unsigned build - Windows SmartScreen may warn on first run
 > (*More info → Run anyway*).
 
 ## Features
 
-- **Cookie / bulk / browser login** — add accounts by `.ROBLOSECURITY` cookie,
+- **Cookie / bulk / browser login** - add accounts by `.ROBLOSECURITY` cookie,
   paste many at once, or sign in through a real Roblox login window.
-- **Encrypted storage** — accounts are sealed with XChaCha20-Poly1305 (Argon2
+- **Encrypted storage** - accounts are sealed with XChaCha20-Poly1305 (Argon2
   key) on-device; optional master password.
-- **Launching** — CSRF + auth-ticket flow, shuffle to random servers, VIP /
+- **Launching** - CSRF + auth-ticket flow, shuffle to random servers, VIP /
   private-server links, close-previous-instance, multi-instance Roblox, FPS
   unlocker.
-- **Utilities** — server browser, game search, favorites, universe viewer,
+- **Utilities** - server browser, game search, favorites, universe viewer,
   outfit browser + wear, follow a user, Roblox watcher.
-- **Account actions** — change display name / follow privacy / password /
+- **Account actions** - change display name / follow privacy / password /
   email, Quick Log In, copy cookie/password.
-- **Automation** — auto-relaunch via the Presence API, background watcher,
+- **Automation** - auto-relaunch via the Presence API, background watcher,
   local HTTP API.
-- **Organisation** — groups (numeric-prefix sorting), drag-to-reorder, per-
+- **Organisation** - groups (numeric-prefix sorting), drag-to-reorder, per-
   account saved Place/Job, recent games, notes.
 - **Theme editor**, live presence & robux, tooltips, and more.
 
@@ -37,7 +37,7 @@ Grab the latest Windows installer (`.msi` or NSIS `-setup.exe`) from the
 
 ```bash
 npm install
-npm run app        # tauri dev — desktop window with hot reload
+npm run app        # tauri dev - desktop window with hot reload
 ```
 
 Verify pieces independently:
@@ -72,10 +72,12 @@ src-tauri/src/
   commands.rs         Tauri command surface
 ```
 
-Cookies stay in the Rust process — the frontend only ever receives a
+Cookies stay in the Rust process the frontend only ever receives a
 cookie-free view of each account.
 
+## Info
 Credit to focats rblx swap for the UI inspo: https://github.com/focat69/rblxswap/
+https://discord.gg/macrostack for support
 
 ## Disclaimer
 
