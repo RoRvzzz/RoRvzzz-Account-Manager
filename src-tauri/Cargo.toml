@@ -1,6 +1,6 @@
 [package]
 name = "ram-tauri"
-version = "1.0.0"
+version = "1.0.1"
 description = "Roblox Account Manager — Rust + Tauri rewrite"
 authors = ["you"]
 edition = "2021"

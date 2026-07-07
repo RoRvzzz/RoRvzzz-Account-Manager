@@ -228,7 +228,7 @@ export default function SettingsModal({
                 A Rust + Tauri + React rewrite of the original C# account
                 manager. Accounts are stored encrypted on this device.
               </p>
-              <p className="text-[0.72rem]">Version 1.0.0</p>
+              <p className="text-[0.72rem]">Version 1.0.1</p>
               <button
                 onClick={() =>
                   window.dispatchEvent(new Event("ram:check-updates"))

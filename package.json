@@ -1,6 +1,6 @@
 {
   "name": "rorvzzz-account-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "RoRvzzz Account Manager — a Rust + Tauri + React Roblox account manager",
