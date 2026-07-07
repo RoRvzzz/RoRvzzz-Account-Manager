@@ -75,7 +75,7 @@ src-tauri/src/
 Cookies stay in the Rust process — the frontend only ever receives a
 cookie-free view of each account.
 
--# Credit to focats rblx swap for the UI inspo: https://github.com/focat69/rblxswap/
+Credit to focats rblx swap for the UI inspo: https://github.com/focat69/rblxswap/
 
 ## Disclaimer
 
